@@ -1,3 +1,12 @@
 https://www.bezkoder.com/spring-boot-security-postgresql-jwt-authentication/
 https://www.bezkoder.com/spring-boot-react-postgresql/
 https://www.bezkoder.com/react-jwt-auth/
+
+Signup:
+http://localhost:8080/api/auth/signup
+{
+    "username": "bk2000",
+    "email": "bkopysc@wp.pl",
+    "password" : "test123",
+    "role" : ["mod", "user"]
+}
