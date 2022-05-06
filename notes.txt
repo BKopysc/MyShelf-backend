@@ -2,6 +2,11 @@ https://www.bezkoder.com/spring-boot-security-postgresql-jwt-authentication/
 https://www.bezkoder.com/spring-boot-react-postgresql/
 https://www.bezkoder.com/react-jwt-auth/
 
+Roles:
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
 Signup:
 http://localhost:8080/api/auth/signup
 {

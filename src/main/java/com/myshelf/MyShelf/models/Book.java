@@ -1,9 +1,13 @@
 package com.myshelf.MyShelf.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "books")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Book {
 
     @Id
@@ -27,6 +31,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn(name="library_id", nullable=false)
+    @JsonIgnore
     private Library library;
 
 
@@ -77,6 +82,14 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Library getLibrary() {
+        return library;
+    }
+
+    public void setLibrary(Library library) {
+        this.library = library;
     }
 
     public boolean isRead() {

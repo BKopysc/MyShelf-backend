@@ -1,5 +1,7 @@
 package com.myshelf.MyShelf.payload.response;
 
+import com.myshelf.MyShelf.models.Library;
+
 import java.util.List;
 
 public class JwtResponse {
@@ -8,13 +10,15 @@ public class JwtResponse {
     private Long id;
     private String username;
     private String email;
+    private Long libraryId;
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
+    public JwtResponse(String accessToken, Long id, String username, String email, Long libraryId, List<String> roles) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
         this.email = email;
+        this.libraryId = libraryId;
         this.roles = roles;
     }
 
@@ -44,6 +48,14 @@ public class JwtResponse {
 
     public String getEmail() {
         return email;
+    }
+
+    public Long getLibraryId() {
+        return libraryId;
+    }
+
+    public void setLibraryId(Long libraryId) {
+        this.libraryId = libraryId;
     }
 
     public void setEmail(String email) {

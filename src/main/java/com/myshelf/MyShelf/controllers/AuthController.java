@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.myshelf.MyShelf.models.Library;
+import com.myshelf.MyShelf.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,6 +44,8 @@ public class AuthController {
     @Autowired
     RoleRepository roleRepository;
     @Autowired
+    LibraryRepository libraryRepository;
+    @Autowired
     PasswordEncoder encoder;
     @Autowired
     JwtUtils jwtUtils;
@@ -53,6 +56,8 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
+        //long libId =
+
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
@@ -61,6 +66,7 @@ public class AuthController {
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
+                userRepository.getById(userDetails.getId()).getLibrary().getId(),
                 roles));
     }
     @PostMapping("/signup")
@@ -108,7 +114,7 @@ public class AuthController {
         user.setRoles(roles);
 
         //generate library
-        Library library = new Library();
+        Library library = new Library(false);
         user.setLibrary(library);
 
         //save User
