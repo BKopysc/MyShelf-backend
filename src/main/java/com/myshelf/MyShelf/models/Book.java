@@ -34,6 +34,10 @@ public class Book {
     @JsonIgnore
     private Library library;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_review_id", referencedColumnName = "id")
+    private BookReview bookReview;
+
 
     public Book() {
 
@@ -98,6 +102,14 @@ public class Book {
 
     public void setRead(boolean read) {
         this.read = read;
+    }
+
+    public BookReview getBookReview() {
+        return bookReview;
+    }
+
+    public void setBookReview(BookReview bookReview) {
+        this.bookReview = bookReview;
     }
 
     @Override
