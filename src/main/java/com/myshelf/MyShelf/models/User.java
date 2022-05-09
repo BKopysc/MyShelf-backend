@@ -34,7 +34,7 @@ public class User {
 
 
     //Connect to library model
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "library_id", referencedColumnName = "id")
     private Library library;
 

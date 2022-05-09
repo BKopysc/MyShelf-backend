@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import com.myshelf.MyShelf.exception.ResourceNotFoundException;
 import com.myshelf.MyShelf.models.Book;
+import com.myshelf.MyShelf.models.BookReview;
 import com.myshelf.MyShelf.models.Library;
 import com.myshelf.MyShelf.repository.BookRepository;
 import com.myshelf.MyShelf.repository.LibraryRepository;
@@ -133,6 +134,7 @@ public class BookController {
 
             if (lib_uid == uid) {
                 bookRequest.setLibrary(libraryData);
+                bookRequest.setBookReview(new BookReview());
                 return new ResponseEntity<>(bookRepository.save(bookRequest), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

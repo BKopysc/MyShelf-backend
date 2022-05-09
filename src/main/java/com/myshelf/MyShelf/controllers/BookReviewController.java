@@ -21,6 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/* Put, Delete, Get */
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/data")
@@ -46,7 +48,7 @@ public class BookReviewController {
 
         Optional<Library> libraryData = libraryRepository.findById(lib_id);
         Optional<Book> bookData = bookRepository.findById(book_id);
-        System.out.println(bookData.get().getBookReview().getId());
+        //System.out.println(bookData.get().getBookReview().getId());
 
         if (libraryData.isPresent() && bookData.get().getBookReview() != null) {
             long rev_id = bookData.get().getBookReview().getId();
@@ -107,8 +109,11 @@ public class BookReviewController {
 
             if(lib_uid == uid){
                 try {
-                    bookReviewRepository.deleteById(rev_id);
-                    System.out.println("Delete review_book with id: " +  rev_id);
+                    //clean not delete!
+                    BookReview rv = reviewData.get();
+                    rv.cleanData();
+                    bookReviewRepository.save(rv);
+                    System.out.println("Delete (clean) review_book with id: " +  rev_id);
                     return new ResponseEntity<>(HttpStatus.OK);
                 }
                 catch(Exception e) {
@@ -126,6 +131,7 @@ public class BookReviewController {
         }
     }
 
+    //doesnt work in this case.
     @PostMapping("/libraries/{id}/books/{book_id}/book_review")
     public ResponseEntity<BookReview> addBookReview(@PathVariable(value="id") long id, @PathVariable(value="book_id") long book_id,
                                                     @RequestHeader(name="Authorization") String token,
@@ -147,6 +153,7 @@ public class BookReviewController {
 
             if (lib_uid == uid) {
                 bookReviewRequest.setBook(bookData);
+                System.out.println(bookReviewRequest);
                 return new ResponseEntity<>(bookReviewRepository.save(bookReviewRequest), HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

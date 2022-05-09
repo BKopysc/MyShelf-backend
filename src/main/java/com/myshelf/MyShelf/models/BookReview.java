@@ -58,6 +58,14 @@ public class BookReview {
         return title;
     }
 
+    public void cleanData() {
+        this.title=null;
+        this.text=null;
+        this.score=0;
+        this.timeToRead=0;
+        this.shouldRead=false;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

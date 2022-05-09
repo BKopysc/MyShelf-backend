@@ -34,9 +34,14 @@ public class Book {
     @JsonIgnore
     private Library library;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_review_id", referencedColumnName = "id")
+    @JoinColumn(name = "bookReview_id", referencedColumnName = "id")
     private BookReview bookReview;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "book_review_id", referencedColumnName = "id")
+
 
 
     public Book() {
