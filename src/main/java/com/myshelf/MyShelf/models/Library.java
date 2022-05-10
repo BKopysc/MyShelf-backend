@@ -21,7 +21,11 @@ public class Library {
         @OneToMany(mappedBy="library")
         private Set<Book> books;
 
-        @JsonIgnore
+        @OneToMany(mappedBy="library")
+        private Set<Film> films;
+
+
+    @JsonIgnore
         @OneToOne(mappedBy = "library")
         private User user;
 
@@ -54,6 +58,14 @@ public class Library {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public Set<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(Set<Film> films) {
+        this.films = films;
     }
 
     public boolean getIsPrivate() {

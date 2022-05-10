@@ -180,7 +180,7 @@ public class BookController {
 //        }
 
     @PutMapping("/libraries/{lib_id}/books/{book_id}")
-    public ResponseEntity<Book> addBook(@PathVariable(value="lib_id") long lib_id, @PathVariable(value="book_id") long book_id, @RequestBody Book bookRequest,
+    public ResponseEntity<Book> putBook(@PathVariable(value="lib_id") long lib_id, @PathVariable(value="book_id") long book_id, @RequestBody Book bookRequest,
                                         @RequestHeader(name="Authorization") String token) {
 
         Optional<Library> libraryData = libraryRepository.findById(lib_id);
