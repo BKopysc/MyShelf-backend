@@ -86,6 +86,25 @@ public class LibraryController {
         }
     }
 
+    @GetMapping("/libraries/by_user/{user_name}")
+    public ResponseEntity<Long> getLibraryById(@PathVariable("user_name") String userName) {
+
+        System.out.println("Get library id by username: "+ userName);
+
+        Optional<User> userData = userRepository.findByUsername(userName);
+
+        if (userData.isPresent()) {
+                //check if ids are the same
+                long lib_uid = userData.get().getLibrary().getId();
+                System.out.println("Found id: " + lib_uid);
+                return new ResponseEntity<>(lib_uid, HttpStatus.OK);
+            }
+
+        else {
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
+    }
+
     @PutMapping("/libraries/{id}")
         public ResponseEntity<Library> changeLibraryPrivacy(@PathVariable("id") long id, @RequestHeader(name="Authorization") String token,
                                                             @RequestBody Library library) {
