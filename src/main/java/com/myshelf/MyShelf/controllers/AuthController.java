@@ -33,7 +33,7 @@ import com.myshelf.MyShelf.repository.UserRepository;
 import com.myshelf.MyShelf.security.jwt.JwtUtils;
 import com.myshelf.MyShelf.security.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
